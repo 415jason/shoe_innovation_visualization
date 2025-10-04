@@ -15,7 +15,7 @@ def main():
         try:
             supabase: Client = create_client(supabase_url, supabase_key)
 
-            df_to_supabase = pd.read_csv("data_full.csv")
+            df_to_supabase = pd.read_csv("marathon_results.csv")
             data_to_insert = df_to_supabase.to_dict(orient="records")
             table_check = supabase.table("marathon_times_full").select("rank").limit(1).execute()
             if not table_check.data:
@@ -118,7 +118,7 @@ def main():
     slider_df = load_data(limit, get_table(selected_distance))
     if "year" in slider_df.columns:
         year_counts = slider_df["year"].value_counts().sort_index()
-        st.markdown("### Frequency of Entries per Year")
+        st.markdown("### Frequency of Top Times per Year in the " + selected_distance)
         st.bar_chart(year_counts)
     else:
         st.error("No 'year' column found in dataset")
@@ -158,7 +158,7 @@ def main():
                 df_plot,
                 x="cumulative_total",
                 y="percent_since_2017",
-                title="Percentage of Entries Since 2017 (Vaporfly 4% Hits the Market)"
+                title="Percentage of Top Times Since 2017 (Vaporfly 4% Hits the Market)"
             )
             fig_line.update_yaxes(title_text="Percentage (%)", range=[0, 100])
             fig_line.update_xaxes(title_text="Number of Entries Included")
@@ -169,7 +169,7 @@ def main():
                 df_plot,
                 x="cumulative_total",
                 y="percent_since_2020",
-                title="Percentage of Entries Since 2020 (Dragonfly Hits the Market)"
+                title="Percentage of Top Times Since 2020 (Dragonfly Hits the Market)"
             )
             fig_line.update_yaxes(title_text="Percentage (%)", range=[0, 100])
             fig_line.update_xaxes(title_text="Number of Entries Included")

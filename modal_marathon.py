@@ -12,7 +12,7 @@ image = (
     .uv_pip_install("streamlit", "supabase", "pandas", "plotly", "python-dotenv")
     .env({"FORCE_REBUILD": "true"})  # 🚨 Add this line to force a rebuild
     .add_local_file(streamlit_script_local_path, streamlit_script_remote_path)
-    .add_local_file("data_full.csv", "/root/data_full.csv")
+    .add_local_file("marathon_results.csv", "/root/marathon_results.csv")
     .add_local_file("half_marathon_results.csv", "/root/half_marathon_results.csv")
     .add_local_file("results_10k.csv", "/root/results_10k.csv")
     .add_local_file("results_5k.csv", "/root/results_5k.csv")
